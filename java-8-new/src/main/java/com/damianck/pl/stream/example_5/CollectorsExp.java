@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class CollectorsExp {
     public static void main(String[] args) {
 
-        List<Person> persons = new ArrayList<>();
+        List<Person> people = new ArrayList<>();
 
         try (
                 BufferedReader reader =
@@ -27,7 +27,7 @@ public class CollectorsExp {
             stream.map(line -> {
                 String[] s = line.split(" ");
                 Person p = new Person(s[0].trim(), Integer.parseInt(s[1]));
-                persons.add(p);
+                people.add(p);
                 return p;
             })
                     .forEach(System.out::println);
@@ -38,16 +38,16 @@ public class CollectorsExp {
         }
 
         Optional<Person> opt =
-                persons.stream().filter(p -> p.getAge() >= 20)
+                people.stream().filter(p -> p.getAge() >= 20)
                         .min(Comparator.comparing(Person::getAge));
         System.out.println(opt);
 
         Optional<Person> opt2 =
-                persons.stream().max(Comparator.comparing(Person::getAge));
+                people.stream().max(Comparator.comparing(Person::getAge));
         System.out.println(opt2);
 
         Map<Integer, String> map =
-                persons.stream()
+                people.stream()
                         .collect(
                                 Collectors.groupingBy(
                                         Person::getAge,
